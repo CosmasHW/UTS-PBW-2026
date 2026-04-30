@@ -1,0 +1,200 @@
+<!DOCTYPE html>
+<html lang="id">
+
+<head>
+    <meta charset="UTF-8">
+    <title>To Do List Form - UTS</title>
+
+    <!-- Bootstrap -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+
+    <style>
+        .main-container {
+            margin-top: 50px;
+            border: 2px solid #7e767680;
+            padding: 0;
+            /* penting supaya garis nempel */
+        }
+
+        .row-full {
+            display: flex;
+            align-items: stretch;
+            /* bikin kolom full height */
+            margin: 0;
+        }
+
+        .left-col {
+            border-right: 2px solid #7e767680;
+            padding: 15px;
+        }
+
+        .right-col {
+            padding: 15px;
+        }
+    </style>
+
+</head>
+
+<body>
+
+    <div class="container mt-4 main-container">
+        <div class="row row-full">
+
+            <!-- KOLOM KIRI -->
+            <div class="col-md-6 left-col">
+                <h3>Deskripsi Program</h3>
+                <p>
+                    Aplikasi To Do List ini digunakan untuk mencatat kegiatan harian.<br>
+                    Terdapat fitur :
+                </p>
+
+                <ul>
+                    <li>Tambah tugas baru</li>
+                    <li>Edit tugas</li>
+                    <li>Hapus tugas</li>
+                    <li>Tandai tugas selesai</li>
+                </ul>
+
+                <p>
+                    Cara menggunakan:
+                </p>
+
+                <ul>
+                    <li>Tambah tugas baru dengan langsung menginputkan nama tugas atau kegiatan pada Nama To-Do. Lalu
+                        klik simpan.
+                        Data akan otomatis ditambahkan ke tabel Daftar To Do.
+                    </li>
+                    <li>Dari daftar To Do, Anda dapat mengedit atau menghapus tugas yang sudah ada jika diperlukan
+                        dan menandai tugas yang sudah selesai.</li>
+
+                </ul>
+            </div>
+
+            <!-- KOLOM KANAN -->
+            <div class="col-md-6 right-col">
+
+                <!-- BARIS 1: FORM -->
+                <div class="card mb-3">
+                    <div class="card-header">Form To Do List</div>
+                    <div class="card-body">
+
+                        <input type="hidden" id="editIndex">
+
+                        <div class="mb-2">
+                            <label>Nama To-Do</label>
+                            <input type="text" id="todoName" class="form-control">
+                        </div>
+
+                        <div class="mb-2">
+                            <label>Tanggal</label>
+                            <input type="date" id="todoDate" class="form-control">
+                        </div>
+
+                        <button class="btn btn-primary" onclick="simpanData()">Simpan</button>
+                    </div>
+                </div>
+
+                <!-- BARIS 2: TABEL -->
+                <div class="card">
+                    <div class="card-header">Daftar To Do</div>
+                    <div class="card-body">
+
+                        <table class="table table-bordered">
+                            <thead>
+                                <tr>
+                                    <th>No</th>
+                                    <th>Nama</th>
+                                    <th>Tanggal</th>
+                                    <th>Selesai</th>
+                                    <th>Aksi</th>
+                                </tr>
+                            </thead>
+                            <tbody id="todoTable"></tbody>
+                        </table>
+
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+    <script>
+        let dataTodo = [];
+        let editMode = false;
+
+        function simpanData() {
+            let nama = document.getElementById("todoName").value;
+            let tanggal = document.getElementById("todoDate").value;
+            let index = document.getElementById("editIndex").value;
+
+            if (nama === "" || tanggal === "") {
+                alert("Harap isi semua field!");
+                return;
+            }
+
+            if (editMode) {
+                dataTodo[index].nama = nama;
+                dataTodo[index].tanggal = tanggal;
+                editMode = false;
+            } else {
+                dataTodo.push({
+                    nama: nama,
+                    tanggal: tanggal,
+                    selesai: false
+                });
+            }
+
+            resetForm();
+            tampilkanData();
+        }
+
+        function tampilkanData() {
+            let table = document.getElementById("todoTable");
+            table.innerHTML = "";
+
+            dataTodo.forEach((item, index) => {
+                table.innerHTML += `
+                <tr>
+                    <td>${index + 1}</td>
+                    <td>${item.nama}</td>
+                    <td>${item.tanggal}</td>
+                    <td>
+                        <input type="checkbox" ${item.selesai ? "checked" : ""} 
+                        onclick="toggleSelesai(${index})">
+                    </td>
+                    <td>
+                        <button class="btn btn-warning btn-sm" onclick="editData(${index})">Edit</button>
+                        <button class="btn btn-danger btn-sm" onclick="hapusData(${index})">Hapus</button>
+                    </td>
+                </tr>
+            `;
+            });
+        }
+
+        function editData(index) {
+            document.getElementById("todoName").value = dataTodo[index].nama;
+            document.getElementById("todoDate").value = dataTodo[index].tanggal;
+            document.getElementById("editIndex").value = index;
+            editMode = true;
+        }
+
+        function hapusData(index) {
+            dataTodo.splice(index, 1);
+            tampilkanData();
+        }
+
+        function toggleSelesai(index) {
+            dataTodo[index].selesai = !dataTodo[index].selesai;
+        }
+
+        function resetForm() {
+            document.getElementById("todoName").value = "";
+            document.getElementById("todoDate").value = "";
+            document.getElementById("editIndex").value = "";
+        }
+    </script>
+
+</body>
+
+</html>
