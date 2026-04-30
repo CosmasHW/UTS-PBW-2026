@@ -9,6 +9,22 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
 
     <style>
+        .logo-img {
+            width: 1.5cm;
+            height: 0.8cm;
+            object-fit: contain;
+        }
+    
+        .navbar-custom {
+            border: 2px solid black;
+            border-bottom: none; /* biar nyambung ke container bawah */
+            padding: 10px 15px;
+        }
+    
+        .brand-text {
+            font-weight: bold;
+            margin-left: 10px;
+        }
         .main-container {
             margin-top: 50px;
             border: 2px solid #7e767680;
@@ -36,8 +52,38 @@
 </head>
 
 <body>
+    <nav class="navbar navbar-expand-lg navbar-light bg-light navbar-custom">
+    <div class="container-fluid">
 
-    <div class="container mt-4 main-container">
+        <!-- Logo + Nama Website -->
+        <div class="d-flex align-items-center">
+            <img src="logo2.png" class="logo-img">
+            <span class="brand-text">My ToDo App</span>
+        </div>
+
+        <!-- Toggle (mobile) -->
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#menuNavbar">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+
+        <!-- Menu -->
+        <div class="collapse navbar-collapse justify-content-end" id="menuNavbar">
+            <ul class="navbar-nav">
+                <li class="nav-item">
+                    <a class="nav-link active" href="index.html">Home</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="TugasP2/index.html">Tugas P2</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="TugasP3/index.html">Tugas P3</a>
+                </li>
+            </ul>
+        </div>
+
+    </div>
+    </nav>
+    <div class="container mt-0 main-container">
         <div class="row row-full">
 
             <!-- KOLOM KIRI -->
