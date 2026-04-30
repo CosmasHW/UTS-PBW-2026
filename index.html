@@ -5,7 +5,6 @@
     <meta charset="UTF-8">
     <title>To Do List Form - UTS</title>
 
-    <!-- Bootstrap -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
 
     <style>
@@ -17,7 +16,7 @@
     
         .navbar-custom {
             border: 2px solid black;
-            border-bottom: none; /* biar nyambung ke container bawah */
+            border-bottom: none; 
             padding: 10px 15px;
         }
     
@@ -29,13 +28,11 @@
             margin-top: 50px;
             border: 2px solid #7e767680;
             padding: 0;
-            /* penting supaya garis nempel */
         }
 
         .row-full {
             display: flex;
             align-items: stretch;
-            /* bikin kolom full height */
             margin: 0;
         }
 
@@ -55,18 +52,15 @@
     <nav class="navbar navbar-expand-lg navbar-light bg-light navbar-custom">
     <div class="container-fluid">
 
-        <!-- Logo + Nama Website -->
         <div class="d-flex align-items-center">
             <img src="logo2.png" class="logo-img">
             <span class="brand-text">My ToDo App</span>
         </div>
 
-        <!-- Toggle (mobile) -->
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#menuNavbar">
             <span class="navbar-toggler-icon"></span>
         </button>
 
-        <!-- Menu -->
         <div class="collapse navbar-collapse justify-content-end" id="menuNavbar">
             <ul class="navbar-nav">
                 <li class="nav-item">
@@ -86,7 +80,6 @@
     <div class="container mt-6 main-container">
         <div class="row row-full">
 
-            <!-- KOLOM KIRI -->
             <div class="col-md-6 left-col">
                 <h3>Deskripsi Program</h3>
                 <p>
@@ -116,10 +109,8 @@
                 </ul>
             </div>
 
-            <!-- KOLOM KANAN -->
             <div class="col-md-6 right-col">
 
-                <!-- BARIS 1: FORM -->
                 <div class="card mb-3">
                     <div class="card-header">Form To Do List</div>
                     <div class="card-body">
@@ -140,7 +131,6 @@
                     </div>
                 </div>
 
-                <!-- BARIS 2: TABEL -->
                 <div class="card">
                     <div class="card-header">Daftar To Do</div>
                     <div class="card-body">
